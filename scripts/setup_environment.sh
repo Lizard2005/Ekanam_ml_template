@@ -1,19 +1,24 @@
 #!/bin/bash
 
-# Создание виртуального окружения
-python -m venv .venv
+# Проверяем, установлен ли uv
+if ! command -v uv &> /dev/null; then
+    echo "UV не установлен. Установка..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
+fi
+
+# Создание виртуального окружения с помощью uv
+uv venv
 
 # Активация окружения
 source .venv/bin/activate
 
-# Установка зависимостей
-pip install -r requirements/dev.txt
-pip install -e .
+# Установка зависимостей для разработки
+uv pip install -e .[dev]
 
 # Инициализация DVC
 dvc init
 
-echo "Environment setup complete!"
-
-# Не забудьте сделать файл исполняемым chmod +x scripts/setup_environment.sh
-# Если у тебя винда, то используй git bash
+echo "Настройка окружения завершена!"
+echo "Активируйте виртуальное окружение: source .venv/bin/activate"s

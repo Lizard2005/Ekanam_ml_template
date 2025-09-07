@@ -24,6 +24,12 @@ setup(
             "black>=22.0.0",
             "isort>=5.10.0",
             "jupyter>=1.0.0",
+            "uv>=0.1.0",
+        ],
+        "production": [
+            "gunicorn>=20.0.0",
+            "uvicorn>=0.20.0",
+            "fastapi>=0.85.0",
         ],
     },
 )

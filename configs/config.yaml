@@ -1,0 +1,35 @@
+# Конфигурация данных
+data:
+  raw_path: "data/raw"
+  processed_path: "data/processed"
+  train_file: "train.csv"
+  test_file: "test.csv"
+  target_column: "target"
+
+# Конфигурация фичей
+features:
+  numeric:
+    - "feature_1"
+    - "feature_2"
+  categorical:
+    - "category_1"
+    - "category_2"
+
+# Конфигурация модели
+model:
+  type: "RandomForest"
+  params:
+    n_estimators: 100
+    max_depth: 10
+    random_state: 42
+
+# Конфигурация обучения
+training:
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+
+# Конфигурация логирования
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
