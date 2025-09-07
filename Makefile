@@ -1,4 +1,4 @@
-.PHONY: help install test clean data train evaluate
+.PHONY: help install test lint data train evaluate serve docker clean
 
 help:
 	@echo "Доступные команды:"
@@ -10,18 +10,23 @@ help:
 	@echo "  make evaluate    Оценить модель"
 	@echo "  make serve       Запустить API сервер"
 	@echo "  make docker      Собрать Docker образ"
+	@echo "  make clean       Очистить временные файлы"
 
 install:
 	pip install -r requirements/dev.txt
 	pip install -e .
 
 test:
-	pytest tests/ -v
+	pytest tests/ -v --cov=src
 
 lint:
-	flake8 src/
+	flake8 src/ tests/
 	black --check src/ tests/
 	isort --check-only src/ tests/
+
+format:
+	black src/ tests/
+	isort src/ tests/
 
 data:
 	python src/data/make_dataset.py
@@ -37,3 +42,9 @@ serve:
 
 docker:
 	docker build -t ml-project .
+
+clean:
+	find . -name "*.pyc" -exec rm -f {} \;
+	find . -name "__pycache__" -exec rm -rf {} \;
+	find . -name ".pytest_cache" -exec rm -rf {} \;
+	find . -name ".coverage" -exec rm -f {} \;
