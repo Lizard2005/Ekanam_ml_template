@@ -57,3 +57,6 @@ mlruns/
 # DVC
 .dvc/tmp
 .dvc/cache
+
+# Cookiecutter
+{{cookiecutter.repo_name}}/
