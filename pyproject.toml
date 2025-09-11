@@ -5,7 +5,7 @@ build-backend = "uv"
 [project]
 name = "ekanam-ml-template"
 version = "0.1.0"
-description = "Production ML project template"
+description = "Шаблон проекта машинного обучения для продакшена"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [

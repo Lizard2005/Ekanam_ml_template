@@ -3,9 +3,9 @@ from setuptools import find_packages, setup
 setup(
     name="ekanam-ml-template",
     version="0.1.0",
-    description="Production ML project template",
-    author="Your Name",
-    author_email="your.email@example.com",
+    description="Шаблон проекта машинного обучения для продакшена",
+    author="Ваше имя",
+    author_email="ваш.email@пример.com",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     python_requires=">=3.9",

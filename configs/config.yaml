@@ -1,3 +1,4 @@
+# Единая конфигурация для ML шаблона
 # Конфигурация данных
 data:
   raw_path: "data/raw"
@@ -5,19 +6,21 @@ data:
   train_file: "train.csv"
   test_file: "test.csv"
   target_column: "target"
+  test_size: 0.2
+  random_state: 42
 
-# Конфигурация фичей
+# Конфигурация признаков
 features:
-  numeric:
-    - "feature_1"
-    - "feature_2"
-  categorical:
-    - "category_1"
-    - "category_2"
+  numeric_features: 
+    - "age"
+    - "income"
+  categorical_features:
+    - "gender"
+    - "education"
 
 # Конфигурация модели
 model:
-  type: "RandomForest"
+  name: "random_forest"
   params:
     n_estimators: 100
     max_depth: 10
@@ -28,8 +31,13 @@ training:
   test_size: 0.2
   random_state: 42
   cv_folds: 5
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  early_stopping_patience: 5
 
 # Конфигурация логирования
 logging:
   level: "INFO"
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/training.log"
