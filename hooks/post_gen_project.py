@@ -103,7 +103,7 @@ def main():
     print(f"Настройка проекта '{project_name}'...")
     
     # Переходим в директорию проекта
-    project_dir = Path(repo_name)
+    project_dir = Path(f'../{repo_name}')
     if project_dir.exists():
         os.chdir(project_dir)
     else:
