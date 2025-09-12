@@ -1,7 +1,0 @@
-# Исключить всё кроме данных и моделей
-/*
-!/data/
-!/models/
-!/data/raw/
-!/data/processed/
-!/models/production/
