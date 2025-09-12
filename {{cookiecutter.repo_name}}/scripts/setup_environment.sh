@@ -17,8 +17,14 @@ source .venv/bin/activate
 # Установка зависимостей для разработки
 uv pip install -e .[dev]
 
+# Проверяем, установлен ли DVC
+if ! command -v dvc &> /dev/null; then
+    echo "DVC не установлен. Установка..."
+    uv pip install dvc
+fi
+
 # Инициализация DVC
 dvc init
 
 echo "Настройка окружения завершена!"
-echo "Активируйте виртуальное окружение: source .venv/bin/activate"s
+echo "Активируйте виртуальное окружение: source .venv/bin/activate"

@@ -1,6 +1,6 @@
 [build-system]
-requires = ["uv"]
-build-backend = "uv"
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "{{ cookiecutter.repo_name }}"
@@ -14,6 +14,7 @@ dependencies = [
     "scikit-learn>=1.0.0",
     "matplotlib>=3.5.0",
     "seaborn>=0.11.0",
+    "dvc>=2.0.0",
 ]
 
 [project.optional-dependencies]
@@ -24,7 +25,6 @@ dev = [
     "black>=22.0.0",
     "isort>=5.10.0",
     "jupyter>=1.0.0",
-    "uv>=0.1.0",
 ]
 production = [
     "gunicorn>=20.0.0",
@@ -33,10 +33,10 @@ production = [
 ]
 
 [tool.uv]
-dev-dependencies = ["pytest", "black", "isort", "jupyter", "uv"]
+dev-dependencies = ["pytest", "black", "isort", "jupyter"]
 
 [tool.black]
-line-length = 88
+line-length = 120
 target-version = ['py{{ cookiecutter.python_version.replace(".", "") }}']
 include = '\.pyi?$'
 exclude = '''

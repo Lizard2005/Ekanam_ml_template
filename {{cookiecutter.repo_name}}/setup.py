@@ -15,6 +15,7 @@ setup(
         "scikit-learn>=1.0.0",
         "matplotlib>=3.5.0",
         "seaborn>=0.11.0",
+        "dvc>=2.0.0",
     ],
     extras_require={
         "dev": [
@@ -24,7 +25,6 @@ setup(
             "black>=22.0.0",
             "isort>=5.10.0",
             "jupyter>=1.0.0",
-            "uv>=0.1.0",
         ],
         "production": [
             "gunicorn>=20.0.0",
