@@ -1,14 +1,14 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="ekanam-ml-template",
+    name="{{ cookiecutter.repo_name }}",
     version="0.1.0",
-    description="Шаблон проекта машинного обучения для продакшена",
-    author="Ваше имя",
-    author_email="ваш.email@пример.com",
+    description="{{ cookiecutter.description }}",
+    author="{{ cookiecutter.author_name }}",
+    author_email="{{ cookiecutter.email }}",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    python_requires=">=3.9",
+    python_requires=">={{ cookiecutter.python_version }}",
     install_requires=[
         "numpy>=1.21.0",
         "pandas>=1.3.0",

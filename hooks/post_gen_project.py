@@ -57,6 +57,42 @@ def create_github_repo(repo_name, description="", private=False, github_token=No
         return None
 
 
+def check_git_config():
+    """
+    Проверяет настройки git пользователя (имя и email).
+    
+    Returns:
+        tuple: (name, email) если настройки существуют, иначе (None, None)
+    """
+    try:
+        # Проверяем локальные настройки репозитория
+        name_result = subprocess.run(["git", "config", "user.name"], capture_output=True, text=True)
+        email_result = subprocess.run(["git", "config", "user.email"], capture_output=True, text=True)
+        
+        name = name_result.stdout.strip() if name_result.returncode == 0 else None
+        email = email_result.stdout.strip() if email_result.returncode == 0 else None
+        
+        return name, email
+    except Exception:
+        return None, None
+
+
+def set_git_config(name, email):
+    """
+    Устанавливает настройки git пользователя.
+    
+    Args:
+        name (str): Имя пользователя
+        email (str): Email пользователя
+    """
+    try:
+        subprocess.run(["git", "config", "user.name", name], check=True)
+        subprocess.run(["git", "config", "user.email", email], check=True)
+        print(f"Настройки git обновлены: {name} <{email}>")
+    except subprocess.CalledProcessError as e:
+        print(f"Ошибка при настройке git: {e}")
+
+
 def initialize_git_and_push(repo_url, github_token=None):
     """
     Инициализирует git репозиторий, делает первый коммит и пушит в удаленный репозиторий.
@@ -66,8 +102,26 @@ def initialize_git_and_push(repo_url, github_token=None):
         github_token (str): Токен доступа к GitHub API
     """
     try:
-        # Инициализируем git репозиторий
-        subprocess.run(["git", "init"], check=True)
+        # Инициализируем git репозиторий с веткой main
+        subprocess.run(["git", "init", "-b", "main"], check=True)
+        
+        # Проверяем настройки git
+        name, email = check_git_config()
+        
+        # Если настройки отсутствуют, запрашиваем их у пользователя
+        if not name or not email:
+            print("Настройки git не найдены. Пожалуйста, укажите ваши данные для коммитов.")
+            if not name:
+                name = input("Введите ваше имя для git коммитов: ").strip()
+            if not email:
+                email = input("Введите ваш email для git коммитов: ").strip()
+            
+            # Устанавливаем настройки git
+            if name and email:
+                set_git_config(name, email)
+            else:
+                print("Имя и email обязательны для создания коммита.")
+                return
         
         # Добавляем все файлы
         subprocess.run(["git", "add", "."], check=True)
@@ -89,6 +143,8 @@ def initialize_git_and_push(repo_url, github_token=None):
         print("Репозиторий успешно инициализирован и код загружен в GitHub.")
     except subprocess.CalledProcessError as e:
         print(f"Ошибка при работе с git: {e}")
+        if e.returncode == 128:
+            print("Убедитесь, что git установлен и настроен правильно.")
     except Exception as e:
         print(f"Неожиданная ошибка: {e}")
 
@@ -103,7 +159,7 @@ def main():
     print(f"Настройка проекта '{project_name}'...")
     
     # Переходим в директорию проекта
-    project_dir = Path(repo_name)
+    project_dir = Path(f'../{repo_name}')
     if project_dir.exists():
         os.chdir(project_dir)
     else:

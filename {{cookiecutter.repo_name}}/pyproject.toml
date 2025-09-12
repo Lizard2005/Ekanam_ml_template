@@ -3,11 +3,11 @@ requires = ["uv"]
 build-backend = "uv"
 
 [project]
-name = "ekanam-ml-template"
+name = "{{ cookiecutter.repo_name }}"
 version = "0.1.0"
-description = "Шаблон проекта машинного обучения для продакшена"
+description = "{{ cookiecutter.description }}"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">={{ cookiecutter.python_version }}"
 dependencies = [
     "numpy>=1.21.0",
     "pandas>=1.3.0",
@@ -37,7 +37,7 @@ dev-dependencies = ["pytest", "black", "isort", "jupyter", "uv"]
 
 [tool.black]
 line-length = 88
-target-version = ['py39']
+target-version = ['py{{ cookiecutter.python_version.replace(".", "") }}']
 include = '\.pyi?$'
 exclude = '''
 /(
