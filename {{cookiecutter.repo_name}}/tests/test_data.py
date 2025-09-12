@@ -64,7 +64,7 @@ def test_preprocess_data(sample_data, config):
     
     assert isinstance(processed_data, pd.DataFrame)
     # Проверка, что категориальные переменные закодированы
-    assert 'gender_F' in processed_data.columns
+    assert 'gender_M' in processed_data.columns
     assert 'education_Master' in processed_data.columns
     # Проверка, что оригинальные категориальные столбцы удалены
     assert 'gender' not in processed_data.columns
