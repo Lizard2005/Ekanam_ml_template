@@ -34,7 +34,7 @@ uv pip install cookiecutter
 #### Создайте новый проект из шаблона:
 
 ```bash
-cookiecutter https://github.com/yourusername/ekanam-ml-template
+cookiecutter https://github.com/LizardAPN/ekanam-ml-template
 ```
 
 #### Ответьте на вопросы о вашем проекте:
