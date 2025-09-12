@@ -18,37 +18,37 @@ help:
 	@echo "  make clean       Очистить временные файлы"
 
 install:
-	$(UV) pip install -e .
+	PYTHONPATH=. $(UV) pip install -e .
 
 install-dev:
-	$(UV) pip install -e .[dev]
+	PYTHONPATH=. $(UV) pip install -e .[dev]
 
 install-prod:
-	$(UV) pip install -e .[production]
+	PYTHONPATH=. $(UV) pip install -e .[production]
 
 test:
-	$(UV) run pytest tests/ -v --cov=src
+	PYTHONPATH=. $(UV) run pytest tests/ -v --cov=src
 
 lint:
-	$(UV) run flake8 src/ tests/
-	$(UV) run black --check src/ tests/
-	$(UV) run isort --check-only src/ tests/
+	PYTHONPATH=. $(UV) run flake8 src/ tests/
+	PYTHONPATH=. $(UV) run black --check src/ tests/
+	PYTHONPATH=. $(UV) run isort --check-only src/ tests/
 
 format:
-	$(UV) run black src/ tests/
-	$(UV) run isort src/ tests/
+	PYTHONPATH=. $(UV) run black src/ tests/
+	PYTHONPATH=. $(UV) run isort src/ tests/
 
 data:
-	$(UV) run python src/data/make_dataset.py
+	PYTHONPATH=. $(UV) run python src/data/make_dataset.py
 
 train:
-	$(UV) run python src/models/train.py
+	PYTHONPATH=. $(UV) run python src/models/train.py
 
 evaluate:
-	$(UV) run python src/models/evaluate.py
+	PYTHONPATH=. $(UV) run python src/models/evaluate.py
 
 serve:
-	$(UV) run uvicorn src.api.app:app --reload --host 0.0.0.0 --port 8000
+	PYTHONPATH=. $(UV) run uvicorn src.api.app:app --reload --host 0.0.0.0 --port 8000
 
 docker:
 	docker build -t ml-project .
