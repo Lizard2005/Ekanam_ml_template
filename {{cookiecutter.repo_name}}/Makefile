@@ -1,6 +1,6 @@
 UV = uv
 
-.PHONY: help install install-dev install-prod test lint format data train evaluate serve docker clean
+.PHONY: help install install-dev install-prod test lint format data train evaluate serve docker clean mlflow-ui
 
 help:
 	@echo "Доступные команды:"
@@ -15,6 +15,7 @@ help:
 	@echo "  make evaluate    Оценить модель"
 	@echo "  make serve       Запустить API сервер"
 	@echo "  make docker      Собрать Docker образ"
+	@echo "  make mlflow-ui   Запустить интерфейс MLflow"
 	@echo "  make clean       Очистить временные файлы"
 
 install:
@@ -52,6 +53,9 @@ serve:
 
 docker:
 	docker build -t ml-project .
+
+mlflow-ui:
+	PYTHONPATH=. $(UV) run mlflow ui
 
 clean:
 	find . -name "*.pyc" -exec rm -f {} \;
