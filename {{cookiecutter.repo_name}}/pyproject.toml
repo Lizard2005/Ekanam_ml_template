@@ -18,6 +18,7 @@ dependencies = [
     "mlflow>=2.0.0",
     "fastapi>=0.85.0",
     "uvicorn>=0.20.0",
+    "mypy_boto3_s3>=1.26.0",
 ]
 
 [project.optional-dependencies]
