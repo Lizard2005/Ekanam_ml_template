@@ -1,7 +1,10 @@
-# Исключить всё кроме данных и моделей
-/*
-!/data/
-!/models/
-!/data/raw/
-!/data/processed/
-!/models/production/
+# Игнорируем временные файлы
+*.tmp
+*.temp
+
+# Игнорируем логи
+*.log
+
+# Игнорируем кэш Python
+__pycache__/
+*.pyc
